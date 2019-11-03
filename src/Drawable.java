@@ -1,5 +1,8 @@
+import javafx.scene.shape.Shape;
+
 public interface Drawable {
 
-    //String getImagePath();
 
+    String getDrawing();
+    Shape getShape();
 }
