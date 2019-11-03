@@ -1,22 +1,22 @@
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class Castle extends Structure implements Drawable {
-    private final String imagePath = "";
+public class WorkerUnit extends GameUnit implements Drawable{
 
-
-    public Castle (){
-        hp += 100;
-        att += 10;
-        def += 10;
+    public WorkerUnit(){
+        hp = 1;
+        att = 1;
+        def = 1;
     }
-
 
     public String getPathToImage(){
-        return imagePath;
+        return "";
     }
+
     public Shape getShape(){
         Rectangle r = new Rectangle(10, 10, 15, 15);
         return r;
     }
+
+
 }

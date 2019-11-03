@@ -3,6 +3,6 @@ import javafx.scene.shape.Shape;
 public interface Drawable {
 
 
-    String getDrawing();
+    String getPathToImage();
     Shape getShape();
 }

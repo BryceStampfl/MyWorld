@@ -10,16 +10,18 @@ public class GameScreen extends Application {
     private Group group;
     private Scene scene;
 
+    private MyWorld world;
+
     public static void main(String[] args) {
         launch(args);
     }
 
 
     public void start(Stage stage) throws Exception {
-
+        world = new MyWorld();
 
         stage = initStage();
-        Rectangle r = new Rectangle(10, 10, 15, 15);
+        //Rectangle r = new Rectangle(10, 10, 15, 15);
         Group group = initGroup(r);
         Scene scene = new Scene(group);
         stage.setScene(scene);
