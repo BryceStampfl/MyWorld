@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Nation {
     private String name;
@@ -8,15 +9,10 @@ public class Nation {
     private final int initialArmyNumber = 10;
 
 
-
-
-
     public Nation(String name){
         this.name = name;
         this.workers = initWorkers();
         this.army = initArmy();
-
-
     }
 
     public String getName(){
@@ -34,9 +30,9 @@ public class Nation {
     private ArrayList<GameUnit> initArmy(){
         army = new ArrayList<GameUnit>();
         for(int i = 0; i < initialArmyNumber; i++){
-            army.add
+            army.add(new Solider());
         }
-
+        return army;
     }
 
 }

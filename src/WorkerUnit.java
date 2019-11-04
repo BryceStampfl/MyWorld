@@ -17,6 +17,4 @@ public class WorkerUnit extends GameUnit implements Drawable{
         Rectangle r = new Rectangle(10, 10, 15, 15);
         return r;
     }
-
-
 }

@@ -1,12 +1,14 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class MyWorld {
-
+Random r;
 private ArrayList<Nation> nations;
 
 
 public MyWorld(){
+        r = new Random(500);
         nations = initNations();
     }
 
