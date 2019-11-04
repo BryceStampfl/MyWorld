@@ -3,12 +3,19 @@ import java.util.ArrayList;
 public class Nation {
     private String name;
     private ArrayList<WorkerUnit> workers;
-    private ArrayList<GameUnit> Army;
+    private ArrayList<GameUnit> army;
+    private final int initialWorkerNumber = 10;
+    private final int initialArmyNumber = 10;
+
+
 
 
 
     public Nation(String name){
         this.name = name;
+        this.workers = initWorkers();
+        this.army = initArmy();
+
 
     }
 
@@ -17,9 +24,19 @@ public class Nation {
     }
 
     private ArrayList<WorkerUnit> initWorkers(){
-        
-
+        workers = new ArrayList<WorkerUnit>();
+        for (int i = 0; i < initialWorkerNumber; i++){
+            workers.add(new WorkerUnit());
+        }
         return workers;
+    }
+
+    private ArrayList<GameUnit> initArmy(){
+        army = new ArrayList<GameUnit>();
+        for(int i = 0; i < initialArmyNumber; i++){
+            army.add
+        }
+
     }
 
 }
