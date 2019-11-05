@@ -1,58 +1,53 @@
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import java.util.ArrayList;
 
-public class GameScreen extends Application {
+public class GameScreen{
+    private final int stageWidth = 1500;
+    private final int stageHeight = 800;
+
     private Stage stage;
-    private Group group;
     private Scene scene;
+    private Group group;
+    private ImageView imageView;
+    private ArrayList<Drawable> objectsToDraw;
 
-    private MyWorld world;
-
-    public static void main(String[] args) {
-        launch(args);
+    public GameScreen(){
+        this.group = initGroup();
+        this.scene = initScene();
+        this.stage = initStage();
     }
-
-
-    public void start(Stage stage) throws Exception {
-        world = new MyWorld();
-
-        stage = initStage();
-        //Rectangle r = new Rectangle(10, 10, 15, 15);
-        Group group = initGroup(r);
-        Scene scene = new Scene(group);
-        stage.setScene(scene);
-        stage.show();
-
-
-
-           /*
-        Image heroImage = new Image("/LightBandit_Spritesheet.png");
-        Node hero = new ImageView(heroImage);
-        StackPane root = new StackPane();
-        root.getChildren().add(hero);
-        stage.setScene(new Scene(root, 1300, 250));
-        stage.show();
-        */
-
-    }
-
 
     private Stage initStage() {
         stage = new Stage(StageStyle.DECORATED);
-        stage.setHeight(800);
-        stage.setWidth(1500);
+        stage.setWidth(stageWidth);
+        stage.setHeight(stageHeight);
         stage.setTitle("My World");
         return stage;
     }
 
-    private Group initGroup(Rectangle r) {
-        Group group = new Group(r);
+
+    private Group initGroup(){
+        group = new Group();
+        for (int i = 0; i < objectsToDraw.size(); i++) {
+            imageView = new ImageView(objectsToDraw.get(i).getImage());
+            group.getChildren().add(imageView);
+        }
         return group;
     }
+
+    private Scene initScene(){
+        scene = new Scene(group, stageWidth,stageHeight);
+        return scene;
+    }
+
+    public void setDrawables(ArrayList<Drawable> objectsToDraw){
+        this.objectsToDraw = objectsToDraw;
+    }
+
 
 
 }

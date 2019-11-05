@@ -3,6 +3,7 @@ import java.util.Random;
 
 public class Nation {
     private String name;
+    private Castle castle;
     private ArrayList<WorkerUnit> workers;
     private ArrayList<GameUnit> army;
     private final int initialWorkerNumber = 10;
@@ -13,6 +14,11 @@ public class Nation {
         this.name = name;
         this.workers = initWorkers();
         this.army = initArmy();
+        castle = new Castle();
+        castle.setXPos( 50 + (new Random(700).nextInt()));
+        castle.setYPos( 50 + (new Random(1400).nextInt()));
+
+
     }
 
     public String getName(){
@@ -30,9 +36,14 @@ public class Nation {
     private ArrayList<GameUnit> initArmy(){
         army = new ArrayList<GameUnit>();
         for(int i = 0; i < initialArmyNumber; i++){
-            army.add(new Solider());
+
+            army.add(new Soldier());
         }
         return army;
+    }
+
+    public Castle getCastle(){
+        return this.castle;
     }
 
 }

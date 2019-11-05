@@ -1,24 +1,59 @@
 
 public abstract class GameUnit implements Drawable {
-    int hp, att, def, moveSpeed,xPos, yPos;
-    DamageBehavior behavior;
-
-    public int getMoveSpeed() {
-        return moveSpeed;
-    }
-    public int getHp(){
-        return hp;
-    }
+    private int hp, att, def, moveSpeed,xPos, yPos;
+    private DamageBehavior behavior;
 
     public int getAtt(){
         return att;
     }
-
+    public int getHp(){
+        return hp;
+    }
     public int getDef(){
         return def;
     }
+    public int getMoveSpeed() {
+        return moveSpeed;
+    }
+    public int getXPos(){
+        return this.xPos;
+    }
+    public int getYPos(){
+        return this.yPos;
+    }
+    public DamageBehavior getBehavior() {
+        return behavior;
+    }
 
+
+
+    public void setAtt(int att) {
+        this.att = att;
+    }
+    public void setHp(int hp) {
+        if (hp < 0){
+            hp = 0;
+        }
+        this.hp = hp;
+    }
+    public void setDef(int def) {
+        this.def = def;
+    }
+    public void setXPos(int x){
+        this.xPos = x;
+    }
+    public void setYPos(int y){
+        this.yPos = y;
+    }
+    public void setMoveSpeed(int moveSpeed) {
+        this.moveSpeed = moveSpeed;
+    }
     public void setBehavior(DamageBehavior behavior) {
         this.behavior = behavior;
     }
+
+
+
+
+
 }

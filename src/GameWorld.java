@@ -1,15 +1,13 @@
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+
 import java.util.ArrayList;
-import java.util.Random;
 
-
-public class MyWorld {
-Random r;
+public class GameWorld {
 private ArrayList<Nation> nations;
 
-
-public MyWorld(){
-        r = new Random(500);
-        nations = initNations();
+public GameWorld(){
+    nations = initNations();
     }
 
     private ArrayList<Nation> initNations(){
@@ -19,8 +17,7 @@ public MyWorld(){
         }
         return nations;
     }
-
-
-
-
+    public ArrayList<Drawable> getDrawables(){
+        return new ArrayList<Drawable>();
+    }
 }
