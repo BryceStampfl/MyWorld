@@ -1,19 +1,13 @@
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
+import javafx.scene.image.Image;
 
 public class Soldier extends GameUnit {
 
     public Soldier(){
 
     }
-
-
-
-
-    public String getPathToImage(){
-        return "";
+    public Image getImage(){
+        return (new Image("/res/Castle1.png"));
     }
-    public Shape getShape(){
-        return (new Rectangle(10, 10, 3, 3));
-    }
+
+
 }

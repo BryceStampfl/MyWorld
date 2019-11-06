@@ -36,7 +36,6 @@ public class Nation {
     private ArrayList<GameUnit> initArmy(){
         army = new ArrayList<GameUnit>();
         for(int i = 0; i < initialArmyNumber; i++){
-
             army.add(new Soldier());
         }
         return army;

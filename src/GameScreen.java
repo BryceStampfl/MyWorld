@@ -16,6 +16,9 @@ public class GameScreen{
     private ArrayList<? extends Drawable> objectsToDraw;
 
     public GameScreen(){
+
+    }
+    public void init(){
         this.group = initGroup();
         this.scene = initScene();
         this.stage = initStage();
@@ -46,6 +49,10 @@ public class GameScreen{
 
     public void setDrawables(ArrayList<? extends Drawable> objectsToDraw){
         this.objectsToDraw = objectsToDraw;
+    }
+
+    public void showScreen(){
+        stage.show();
     }
 
 
