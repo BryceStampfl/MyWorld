@@ -13,7 +13,7 @@ public class GameScreen{
     private Scene scene;
     private Group group;
     private ImageView imageView;
-    private ArrayList<Drawable> objectsToDraw;
+    private ArrayList<? extends Drawable> objectsToDraw;
 
     public GameScreen(){
         this.group = initGroup();
@@ -44,7 +44,7 @@ public class GameScreen{
         return scene;
     }
 
-    public void setDrawables(ArrayList<Drawable> objectsToDraw){
+    public void setDrawables(ArrayList<? extends Drawable> objectsToDraw){
         this.objectsToDraw = objectsToDraw;
     }
 

@@ -46,4 +46,8 @@ public class Nation {
         return this.castle;
     }
 
+    public ArrayList<GameUnit> getArmy(){
+        return army;
+    }
+
 }

@@ -11,13 +11,7 @@ public class Castle extends Structure implements Drawable {
         setHp(100);
     }
 
-    public String getPathToImage(){
-        return imagePath;
-    }
-    public Shape getShape(){
-        Rectangle r = new Rectangle(10, 10, 15, 15);
-        return r;
-    }
+
     public Image getImage(){
         return (new Image(""));
     }

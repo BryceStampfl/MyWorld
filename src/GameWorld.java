@@ -1,5 +1,3 @@
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 
@@ -17,7 +15,12 @@ public GameWorld(){
         }
         return nations;
     }
-    public ArrayList<Drawable> getDrawables(){
-        return new ArrayList<Drawable>();
+
+    //TODO add logic
+    //TODO look up wildcare vs upcasting
+    public ArrayList<? extends Drawable> getDrawables() {
+        return  (nations.get(0).getArmy());
+
+
     }
 }

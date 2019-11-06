@@ -1,4 +1,7 @@
+import javafx.scene.image.Image;
 
+
+//TODO all logic for stealth or rogue like behavior
 public abstract class GameUnit implements Drawable {
     private int hp, att, def, moveSpeed,xPos, yPos;
     private DamageBehavior behavior;
@@ -52,8 +55,16 @@ public abstract class GameUnit implements Drawable {
         this.behavior = behavior;
     }
 
-
-
-
-
+    //Placeholder until I finish subclass constructors
+    public GameUnit(){
+        setAtt(1);
+        setDef(1);
+        setHp(1);
+        setMoveSpeed(1);
+        setBehavior(new FullHealth());
+    }
+    //Placeholder until I find or create the sprites I want
+    public Image getImage(){
+        return (new Image("/res/Castle1.png"));
+    }
 }
