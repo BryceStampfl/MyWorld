@@ -11,9 +11,7 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         myWorld = new GameWorld();
-
         myScreen = new GameScreen();
 
         // Sends the Sprites to myScreen so they can be added to the Group later.

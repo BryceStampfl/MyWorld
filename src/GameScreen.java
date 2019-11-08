@@ -12,8 +12,7 @@ public class GameScreen{
     private Stage stage;
     private Scene scene;
     private Group group;
-    private ImageView imageView;
-    private ArrayList<? extends Drawable> objectsToDraw;
+    private ArrayList<ImageView> objectsToDraw1;
 
     public GameScreen(){
 
@@ -35,9 +34,8 @@ public class GameScreen{
 
     private Group initGroup(){
         group = new Group();
-        for (int i = 0; i < objectsToDraw.size(); i++) {
-            imageView = new ImageView(objectsToDraw.get(i).getImage());
-            group.getChildren().add(imageView);
+        for (int i = 0; i < objectsToDraw1.size(); i++) {
+            group.getChildren().add(objectsToDraw1.get(i));
         }
         return group;
     }
@@ -47,8 +45,12 @@ public class GameScreen{
         return scene;
     }
 
+    //Changes from interface type arraylist of drawables to imageview so we can display to screen.
     public void setDrawables(ArrayList<? extends Drawable> objectsToDraw){
-        this.objectsToDraw = objectsToDraw;
+        objectsToDraw1 = new ArrayList<ImageView>();
+        for (int i = 0; i < objectsToDraw.size();i++){
+            this.objectsToDraw1.add(objectsToDraw.get(i).getImageView());
+        }
     }
 
     public void showScreen(){

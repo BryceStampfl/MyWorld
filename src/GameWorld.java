@@ -16,11 +16,15 @@ public GameWorld(){
         return nations;
     }
 
-    //TODO add logic
-    //TODO look up wildcare vs upcasting
+    // For now only the militaristic game units will be drawable.
+    // To get the drawable objects we go through each nation and get all the units.
+    //TODO add other units besides castles to the gamescreen
     public ArrayList<? extends Drawable> getDrawables() {
-        return  (nations.get(0).getArmy());
-
+        ArrayList<GameUnit> temp = new ArrayList<GameUnit>();
+        for(int i = 0; i < nations.size();i++){
+            temp.add(nations.get(i).getCastle());
+        }
+        return (temp);
 
     }
 }

@@ -1,3 +1,4 @@
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -14,4 +15,8 @@ public class WorkerUnit extends GameUnit implements Drawable{
         return r;
     }
 
+    @Override
+    public ImageView getImageView() {
+        return null;
+    }
 }

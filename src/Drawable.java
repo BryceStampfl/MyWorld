@@ -1,5 +1,5 @@
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public interface Drawable {
-    Image getImage();
+    ImageView getImageView();
 }

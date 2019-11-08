@@ -1,5 +1,3 @@
-import javafx.scene.image.Image;
-
 
 //TODO all logic for stealth or rogue like behavior
 public abstract class GameUnit implements Drawable {
@@ -64,7 +62,6 @@ public abstract class GameUnit implements Drawable {
         setBehavior(new FullHealth());
     }
     //Placeholder until I find or create the sprites I want
-    public Image getImage(){
-        return (new Image("/res/Castle1.png"));
-    }
+    //public abstract ImageView getImageView();
+   // }
 }

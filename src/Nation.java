@@ -14,11 +14,8 @@ public class Nation {
         this.name = name;
         this.workers = initWorkers();
         this.army = initArmy();
-        castle = new Castle();
-        castle.setXPos( 50 + (new Random(700).nextInt()));
-        castle.setYPos( 50 + (new Random(1400).nextInt()));
-
-
+        castle = new Castle(50 + (new Random().nextInt(700)),
+                50 + (new Random().nextInt(1400)));
     }
 
     public String getName(){
