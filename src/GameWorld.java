@@ -10,7 +10,7 @@ public GameWorld(){
 
     private ArrayList<Nation> initNations(){
         ArrayList<Nation> nations = new ArrayList<Nation>();
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 1; i++){
             nations.add(new Nation("Nation" + (i+1) ));
         }
         return nations;

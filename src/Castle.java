@@ -20,8 +20,8 @@ public class Castle extends Structure implements Drawable {
 
     private void initImageView(){
         imageView = new ImageView(imagePath);
-        imageView.setX(this.getXPos());
-        imageView.setY(this.getYPos());
+        imageView.setX(100);
+        imageView.setY(100);
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
         imageView.setPreserveRatio(true);
