@@ -1,7 +1,11 @@
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
+// TODO Add method to initAttributes
 public class Castle extends Structure implements Drawable {
-    private final String imagePath = "/res/Castle1.png";
+    private final String IMAGE_PATH = "/res/Castle1.png";
+    private Image castleImage;
     private ImageView imageView;
 
     public Castle (int xLoc, int yLoc){
@@ -13,18 +17,22 @@ public class Castle extends Structure implements Drawable {
         initImageView();
     }
 
-
     public ImageView getImageView(){
         return imageView;
     }
 
+
+    // Need to create the Image once to share it to multiple objects.
     private void initImageView(){
-        imageView = new ImageView(imagePath);
-        imageView.setX(100);
-        imageView.setY(100);
+        this.castleImage = new Image(IMAGE_PATH);
+        imageView = new ImageView(castleImage);
+        imageView.setX(getXPos());
+        imageView.setY(getYPos());
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
         imageView.setPreserveRatio(true);
     }
+
+
 }
 

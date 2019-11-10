@@ -6,8 +6,8 @@ public class Nation {
     private Castle castle;
     private ArrayList<WorkerUnit> workers;
     private ArrayList<GameUnit> army;
-    private final int initialWorkerNumber = 10;
-    private final int initialArmyNumber = 10;
+    private final int INIT_NUM_WORKERS = 10;
+    private final int INIT_NUM_ARMY = 10;
 
 
     public Nation(String name){
@@ -24,7 +24,7 @@ public class Nation {
 
     private ArrayList<WorkerUnit> initWorkers(){
         workers = new ArrayList<WorkerUnit>();
-        for (int i = 0; i < initialWorkerNumber; i++){
+        for (int i = 0; i < INIT_NUM_WORKERS; i++){
             workers.add(new WorkerUnit());
         }
         return workers;
@@ -32,7 +32,7 @@ public class Nation {
 
     private ArrayList<GameUnit> initArmy(){
         army = new ArrayList<GameUnit>();
-        for(int i = 0; i < initialArmyNumber; i++){
+        for(int i = 0; i < INIT_NUM_ARMY; i++){
             army.add(new Soldier());
         }
         return army;

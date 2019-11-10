@@ -17,6 +17,7 @@ public class GameScreen{
     public GameScreen(){
 
     }
+
     public void init(){
         this.group = initGroup();
         this.scene = initScene();
