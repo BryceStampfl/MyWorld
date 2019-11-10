@@ -28,6 +28,7 @@ public class GameScreen{
         stage.setWidth(stageWidth);
         stage.setHeight(stageHeight);
         stage.setTitle("My World");
+        stage.setScene(scene);
         return stage;
     }
 
@@ -45,7 +46,6 @@ public class GameScreen{
         return scene;
     }
 
-    //Changes from interface type arraylist of drawables to imageview so we can display to screen.
     public void setDrawables(ArrayList<? extends Drawable> objectsToDraw){
         objectsToDraw1 = new ArrayList<ImageView>();
         for (int i = 0; i < objectsToDraw.size();i++){
