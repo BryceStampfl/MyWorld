@@ -1,38 +1,25 @@
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.util.ArrayList;
 
 public class GameScreen{
-    private final int stageWidth = 1500;
-    private final int stageHeight = 800;
 
     private Stage stage;
     private Scene scene;
     private Group group;
     private ArrayList<ImageView> objectsToDraw1;
 
-    public GameScreen(){
-
-    }
 
     public void init(){
         this.group = initGroup();
         this.scene = initScene();
         this.stage = initStage();
     }
-
-    private Stage initStage() {
-        stage = new Stage(StageStyle.DECORATED);
-        stage.setWidth(stageWidth);
-        stage.setHeight(stageHeight);
-        stage.setTitle("My World");
-        stage.setScene(scene);
-        return stage;
-    }
-
 
     private Group initGroup(){
         group = new Group();
@@ -41,11 +28,21 @@ public class GameScreen{
         }
         return group;
     }
-
     private Scene initScene(){
-        scene = new Scene(group, stageWidth,stageHeight);
+        scene = new Scene(group);
         return scene;
     }
+    private Stage initStage() {
+        Rectangle2D primaryScreen = Screen.getPrimary().getVisualBounds();
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setWidth(primaryScreen.getWidth());
+        stage.setHeight(primaryScreen.getHeight());
+        stage.setTitle("My World");
+        stage.setScene(scene);
+        return stage;
+    }
+
+
 
     public void setDrawables(ArrayList<? extends Drawable> objectsToDraw){
         objectsToDraw1 = new ArrayList<ImageView>();

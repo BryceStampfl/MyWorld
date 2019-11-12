@@ -8,14 +8,16 @@ public class Nation {
     private ArrayList<GameUnit> army;
     private final int INIT_NUM_WORKERS = 10;
     private final int INIT_NUM_ARMY = 10;
+    private int id;
 
 
-    public Nation(String name){
+    public Nation(String name, int id){
         this.name = name;
+        this.id = id;
         this.workers = initWorkers();
         this.army = initArmy();
         castle = new Castle(50 + (new Random().nextInt(700)),
-                50 + (new Random().nextInt(1400)));
+                50 + (new Random().nextInt(1400)), id);
     }
 
     public String getName(){
