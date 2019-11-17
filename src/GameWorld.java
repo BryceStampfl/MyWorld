@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class GameWorld {
 private ArrayList<Nation> nations;
-private final int NUM_NATIONS = 4;
+private final int NUM_NATIONS = 3;
 
 public GameWorld(){
     nations = initNations();

@@ -2,6 +2,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -28,6 +29,7 @@ public class GameScreen{
         for (int i = 0; i < objectsToDraw.size(); i++) {
             group.getChildren().add(objectsToDraw.get(i).getImageView());
         }
+
         return group;
     }
     private Scene initScene(){

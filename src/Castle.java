@@ -9,7 +9,7 @@ public class Castle extends Structure implements Drawable {
     private ImageView imageView;
 
     public Castle (int xLoc, int yLoc, int id){
-        this.IMAGE_PATH = "/res/Castle" + (id+1) +".png";
+        this.IMAGE_PATH = "/res/Castles/Castle" + (id+1) +".png";
         setAtt(10);
         setDef(100);
         setHp(100);
@@ -28,16 +28,16 @@ public class Castle extends Structure implements Drawable {
         imageView = new ImageView(new Image(IMAGE_PATH));
         imageView.setX(getXPos());
         imageView.setY(getYPos());
-        imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(200);
         imageView.setPreserveRatio(true);
     }
 
     public void update(){
-        this.setXPos(this.getXPos() +1);
+      /*  this.setXPos(this.getXPos() +1);
         this.setYPos(this.getYPos() +1);
         this.imageView.setX(this.getXPos());
-        this.imageView.setY(this.getYPos());
+        this.imageView.setY(this.getYPos()); */
     }
 
 
