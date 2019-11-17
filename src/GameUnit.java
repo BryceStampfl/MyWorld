@@ -61,7 +61,6 @@ public abstract class GameUnit implements Drawable {
         setMoveSpeed(1);
         setBehavior(new FullHealth());
     }
-    //Placeholder until I find or create the sprites I want
-    //public abstract ImageView getImageView();
-   // }
+
+    public abstract void update();
 }

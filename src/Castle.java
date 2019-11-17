@@ -37,6 +37,15 @@ public class Castle extends Structure implements Drawable {
         imageView.setPreserveRatio(true);
     }
 
+    public void update(){
+        this.setXPos(this.getXPos() +1);
+        this.setYPos(this.getYPos() +1);
+        this.imageView.setX(this.getXPos());
+        this.imageView.setY(this.getYPos());
+
+        System.out.println("This castle is now at (" + this.getXPos() + " , " + this.getYPos() + ")");
+    }
+
 
 }
 

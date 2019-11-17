@@ -28,4 +28,10 @@ public GameWorld(){
         return (temp);
 
     }
+
+    public void update(){
+        for (Nation n : nations){
+            n.update();
+        }
+    }
 }

@@ -19,4 +19,7 @@ public class WorkerUnit extends GameUnit implements Drawable{
     public ImageView getImageView() {
         return null;
     }
+    public void update(){
+
+    }
 }

@@ -17,7 +17,7 @@ public class Nation {
         this.workers = initWorkers();
         this.army = initArmy();
         castle = new Castle(50 + (new Random().nextInt(700)),
-                50 + (new Random().nextInt(1400)), id);
+                50 + (new Random().nextInt(1000)), id);
     }
 
     public String getName(){
@@ -46,6 +46,24 @@ public class Nation {
 
     public ArrayList<GameUnit> getArmy(){
         return army;
+    }
+
+    public void update(){
+        updateArmy();
+        updateWorkers();
+        updateCastle();
+    }
+    private void updateArmy(){
+        for (GameUnit g : army){
+            g.update();
+        }
+    }
+    private void updateWorkers(){
+
+    }
+
+    private void updateCastle(){
+        this.castle.update();
     }
 
 }
