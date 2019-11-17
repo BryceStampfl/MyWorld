@@ -61,7 +61,6 @@ public class Nation {
     private void updateWorkers(){
 
     }
-
     private void updateCastle(){
         this.castle.update();
     }

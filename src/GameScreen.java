@@ -13,7 +13,6 @@ public class GameScreen{
     private Stage stage;
     private Scene scene;
     private Group group;
-    private Canvas canvas;
     private Rectangle2D primaryScreen;
     private ArrayList<? extends Drawable> objectsToDraw;
 
@@ -48,7 +47,6 @@ public class GameScreen{
     public void setDrawables(ArrayList<? extends Drawable> objectsToDraw){
         this.objectsToDraw = objectsToDraw;
     }
-
 
     public void showScreen(){
         stage.show();

@@ -34,15 +34,14 @@ public class Game extends Application {
 
 
     public Timeline initTimeline(){
-        //One Frame
         KeyFrame kf = new KeyFrame(Duration.millis(1000 / 30), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 updateSprites();
-               // checkCollisions();
+                //checkCollisions();
                 //cleanupSprites();
             }
-        }); //One Frame
+        });
         timeline = new Timeline(kf);
         timeline.setCycleCount(Timeline.INDEFINITE);
         return (timeline);
@@ -50,6 +49,5 @@ public class Game extends Application {
 
     private void updateSprites(){
         myWorld.update();
-
     }
 }

@@ -27,7 +27,6 @@ public abstract class GameUnit implements Drawable {
     }
 
 
-
     public void setAtt(int att) {
         this.att = att;
     }
@@ -55,10 +54,6 @@ public abstract class GameUnit implements Drawable {
 
     //Placeholder until I finish subclass constructors
     public GameUnit(){
-        setAtt(1);
-        setDef(1);
-        setHp(1);
-        setMoveSpeed(1);
         setBehavior(new FullHealth());
     }
 
