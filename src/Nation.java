@@ -14,10 +14,11 @@ public class Nation {
     public Nation(String name, int id){
         this.name = name;
         this.id = id;
-        this.workers = initWorkers();
-        this.army = initArmy();
         castle = new Castle((new Random().nextInt(1500)),
-                 (new Random().nextInt(800)), id);
+                (new Random().nextInt(800)), id);
+        this.workers = initWorkers();
+        this.army = initArmy(id);
+
     }
 
     public String getName(){
@@ -32,10 +33,10 @@ public class Nation {
         return workers;
     }
 
-    private ArrayList<GameUnit> initArmy(){
+    private ArrayList<GameUnit> initArmy(int id){
         army = new ArrayList<GameUnit>();
         for(int i = 0; i < INIT_NUM_ARMY; i++){
-            army.add(new Soldier());
+            army.add(new Soldier(id,castle.getXPos()+i*50, castle.getYPos()));
         }
         return army;
     }
