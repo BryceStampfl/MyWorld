@@ -1,9 +1,12 @@
+import java.awt.*;
 
 //TODO all logic for stealth or rogue like behavior
 public abstract class GameUnit implements Drawable {
     private int hp, att, def, moveSpeed,xPos, yPos;
     private DamageBehavior behavior;
 
+
+    public int nationID;
     public int getAtt(){
         return att;
     }
@@ -52,10 +55,11 @@ public abstract class GameUnit implements Drawable {
         this.behavior = behavior;
     }
 
-    //Placeholder until I finish subclass constructors
-    public GameUnit(){
-        setBehavior(new FullHealth());
+
+    public int getNationID(){
+        return nationID;
     }
 
     public abstract void update();
+
 }

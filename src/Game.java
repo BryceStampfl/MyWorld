@@ -6,11 +6,14 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
+
 
 public class Game extends Application {
     private GameWorld myWorld;
     private GameScreen myScreen;
     private Timeline timeline;
+    public ImageManager imageManager;
 
 
     public static void main(String[] args){
@@ -19,6 +22,7 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        imageManager = new ImageManager();
         myWorld = new GameWorld();
         myScreen = new GameScreen();
         timeline = initTimeline();
