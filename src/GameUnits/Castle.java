@@ -1,3 +1,6 @@
+package GameUnits;
+
+import GUI.ImageManager;
 import javafx.scene.image.ImageView;
 
 
@@ -15,10 +18,6 @@ public class Castle extends Structure implements Drawable {
         initImageView();
     }
 
-    public ImageView getImageView(){
-        return imageView;
-    }
-
 
     // Need to create the Image once to share it to multiple objects.
     private void initImageView(){
@@ -34,6 +33,9 @@ public class Castle extends Structure implements Drawable {
 
     }
 
+    public ImageView getImageView(){
+        return imageView;
+    }
 
 }
 

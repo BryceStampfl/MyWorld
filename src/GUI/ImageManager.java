@@ -1,3 +1,5 @@
+package GUI;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -15,16 +17,19 @@ public final class ImageManager {
         return INSTANCE;
     }
 
-    public ImageView getImage( int nationID,String c){
+    public ImageView getImage( int nationID,String c) {
 
-        if (c.equals("Soldier")){
+        if (c.equals("Soldier")) {
             return new ImageView(knights.get(nationID));
 
         }
-        if (c.equals("Castle")){
+        else if (c.equals("Castle")) {
             return new ImageView(castles.get(nationID));
         }
-        return null;
+        else {
+            System.out.println("ERROR RETURNING");
+        }
+        return new ImageView(knights.get(0));
     }
 
     public ImageManager(){
@@ -35,7 +40,7 @@ public final class ImageManager {
     public  ArrayList<Image> initCastleArray(){
         castles = new ArrayList<Image>();
         for (int i = 0; i < NUM_CASTLES; i++){
-            castles.add((new Image("/res/Castles/Castle" + i + ".png")));
+            castles.add((new Image("/resources/Castles/Castle" + i + ".png")));
         }
         return castles;
     }
@@ -43,7 +48,7 @@ public final class ImageManager {
     public  ArrayList<Image> initKnightArray(){
         knights = new ArrayList<Image>();
         for (int i = 0; i < NUM_KNIGHTS; i++){
-            knights.add((new Image("/res/Knights/Knight" + i + ".png")));
+            knights.add((new Image("/resources/Knights/Knight" + i + ".png")));
         }
         return knights;
     }

@@ -1,3 +1,5 @@
+package GameUnits;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,9 +9,8 @@ public class Nation {
     private ArrayList<WorkerUnit> workers;
     private ArrayList<GameUnit> army;
     private final int INIT_NUM_WORKERS = 10;
-    private final int INIT_NUM_ARMY = 10;
+    private final int INIT_NUM_ARMY = 2;
     private int id;
-
 
     public Nation(String name, int id){
         this.name = name;

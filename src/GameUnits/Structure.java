@@ -1,3 +1,7 @@
+package GameUnits;
+
+import GameUnits.GameUnit;
+
 public  abstract class Structure extends GameUnit {
     final int moveSpeed = 0;
     private int population = 0;

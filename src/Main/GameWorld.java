@@ -1,3 +1,7 @@
+package Main;
+import GameUnits.*;
+import GameUnits.Nation;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
@@ -19,20 +23,32 @@ public class GameWorld {
 
     // For now only the militaristic game units will be drawable.
     //TODO add other units besides castles to the game screen
-    public ArrayList<? extends Drawable> getDrawables() {
+    public ArrayList<GameUnit> getAllUnits() {
         ArrayList<GameUnit> temp = new ArrayList<GameUnit>();
 
-        for (int i = 0; i < nations.size(); i++) {
+        for (Nation nation : nations) {
             // temp.add(nations.get(i).getCastle());
-            for (GameUnit g : nations.get(i).getArmy()) {
-                temp.add(g);
-            }
+            temp.addAll(nation.getArmy());
         }
-        for (int i = 0; i < nations.size(); i++) {
-            temp.add(nations.get(i).getCastle());
+        for (Nation nation : nations) {
+            temp.add(nation.getCastle());
         }
         return (temp);
     }
+
+    public ArrayList<ImageView> getDrawables(){
+        ArrayList<ImageView> temp = new ArrayList<ImageView>();
+        for (Nation nation : nations) {
+            for (GameUnit g : nation.getArmy()) {
+                temp.add(g.getImageView());
+            }
+        }
+        for (Nation nation : nations) {
+            temp.add(nation.getCastle().getImageView());
+        }
+        return temp;
+    }
+
 
     public void update() {
         for (Nation n : nations) {

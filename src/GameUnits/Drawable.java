@@ -1,3 +1,5 @@
+package GameUnits;
+
 import javafx.scene.image.ImageView;
 
 public interface Drawable {

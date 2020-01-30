@@ -1,8 +1,12 @@
+package GameUnits;
+
+import GameUnits.Drawable;
+import GameUnits.GameUnit;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public class WorkerUnit extends GameUnit implements Drawable{
+public class WorkerUnit extends GameUnit implements Drawable {
 
 
 
