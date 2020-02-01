@@ -51,7 +51,7 @@ public class Game extends Application {
 
 
     public Timeline initTimeline(){
-        KeyFrame kf = new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+        KeyFrame kf = new KeyFrame(Duration.millis(1000/5), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent kf) {
                 gameWorld.update();

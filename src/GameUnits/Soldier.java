@@ -9,23 +9,17 @@ public class Soldier extends GameUnit {
 
 
     public void update(){
-        System.out.println("Before update: X=" + getXPos() + " Y=" + getYPos());
-        System.out.println("ImageView before:" + imageView.getX()+ " Y=" + imageView.getY());
-
         setXPos(getXPos() + getMoveSpeed());
         setYPos(getYPos() + getMoveSpeed());
         imageView.setX(getXPos());
         imageView.setY(getYPos());
-        System.out.println("After update: X=" + getXPos() + " Y=" + getYPos());
-        System.out.println("ImageView After:" + imageView.getX()+ " Y=" + imageView.getY());
-
-    }
+        }
 
     public Soldier(int nationID, int x, int y){
         this.nationID = nationID;
         this.setXPos(x);
         this.setYPos(y);
-        setMoveSpeed(10);
+        setMoveSpeed(0);
         initImageView();
     }
 

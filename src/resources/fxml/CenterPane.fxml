@@ -3,5 +3,5 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<Pane fx:id="centerPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CenterPaneController">
+<Pane fx:id="centerPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="1000.0" minWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CenterPaneController">
 </Pane>
