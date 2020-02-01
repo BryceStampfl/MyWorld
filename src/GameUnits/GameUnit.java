@@ -1,7 +1,6 @@
 package GameUnits;
 
 import Behaviors.DamageBehavior;
-import GameUnits.Drawable;
 
 //TODO all logic for stealth or rogue like behavior
 public abstract class GameUnit implements Drawable {

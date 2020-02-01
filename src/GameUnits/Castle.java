@@ -4,7 +4,6 @@ import GUI.ImageManager;
 import javafx.scene.image.ImageView;
 
 
-// TODO Add method to initAttributes
 public class Castle extends Structure implements Drawable {
     private ImageView imageView;
 

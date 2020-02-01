@@ -1,6 +1,5 @@
 package Main;/*
                                                                                    */
-import GUI.CenterPaneController;
 import GUI.ImageManager;
 import GUI.MasterController;
 import javafx.animation.KeyFrame;

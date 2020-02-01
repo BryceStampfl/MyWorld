@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -122,14 +121,5 @@ public class CenterPaneController {
                 }
             }
         });
-/*
-        centerPane.setOnMouseDragExited(new EventHandler<MouseDragEvent>() {
-            @Override
-            public void handle(MouseDragEvent event) {
-                dragX = 0;
-                dragY = 0;
-            }
-        });
-        */
     }
 }

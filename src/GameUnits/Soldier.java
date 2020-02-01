@@ -1,7 +1,6 @@
 package GameUnits;
 
 import GUI.ImageManager;
-import GameUnits.GameUnit;
 import javafx.scene.image.ImageView;
 
 public class Soldier extends GameUnit {
