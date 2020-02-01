@@ -5,53 +5,48 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-
-
+/*
+This is our controller for our middle pane that renders all the graphics.
+It has zoom capability with the mouse wheel and also has drag capability
+with the mouse click and hold.
+ */
 public class CenterPaneController {
-    final double SCALING_AMOUNT = 0.1;
+    final double SCALING_AMOUNT = 0.2;
     private double scaleFactor = 1;
 
     //Higher rate to further slow dragging so its smoother.
     private double dragSlowRate = 4;
-    //
+
+    //Values to hold how far we need to/have done X and Y translations.
     private double dragX = 1;
     private double dragY = 1;
-    //
+
+    //Values to hold the last X and Y position for dragging.
     private double lastXPos = 0;
     private double lastYPos = 0;
 
+    @FXML private Pane centerPane; // Value injected by FXMLLoader
 
-    
-    @FXML // fx:id="centerPane"
-    private Pane centerPane; // Value injected by FXMLLoader
-
-    @FXML
-        // This method is called by the FXMLLoader when initialization is complete
+    @FXML    // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         initZoom();
         initDrag();
-        assert centerPane != null : "fx:id=\"centerPane\" was not injected: check your FXML file 'CenterPane.fxml'.";
     }
+
 
     public void update(GameWorld gameWorld) {
         Group group = new Group();
         group.getChildren().addAll(gameWorld.getDrawables());
         group.setScaleX(group.getScaleX() * scaleFactor);
-        group.setScaleX(group.getScaleY() * scaleFactor);
+        group.setScaleY(group.getScaleY() * scaleFactor);
         group.setTranslateX(dragX);
         group.setTranslateY(dragY);
 
         centerPane.getChildren().clear();
         centerPane.getChildren().addAll(group);
-
     }
     public CenterPaneController(){
         assert centerPane != null : "fx:id=\"centerPane\" was not injected: check your FXML file 'CenterPane.fxml'.";
@@ -62,19 +57,20 @@ public class CenterPaneController {
             @Override
             public void handle(ScrollEvent event) {
                 event.consume();;
-
                 if (event.getDeltaY() > 0){
-                    scaleFactor += 0.25;
+                    scaleFactor += SCALING_AMOUNT;
                 }
                 else if (event.getDeltaY() < 0){
-                    scaleFactor -= 0.25;
+                    scaleFactor -= SCALING_AMOUNT;
+                    if (scaleFactor <= 0) {
+                        scaleFactor = 0.1;
+                    }
                 }
             }
         });
     }
 
     private void initDrag() {
-
             /*When mouse is clicked we record the cursor is so we know
             where to start the dragging point from.*/
             centerPane.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -90,7 +86,6 @@ public class CenterPaneController {
             centerPane.setOnMouseReleased(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    System.out.println("MouseExited");
                     centerPane.getScene().setCursor(Cursor.DEFAULT);
                 }
             });

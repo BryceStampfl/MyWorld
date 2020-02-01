@@ -18,7 +18,7 @@ public class Soldier extends GameUnit {
         this.nationID = nationID;
         this.setXPos(x);
         this.setYPos(y);
-        setMoveSpeed(0);
+        setMoveSpeed(5);
         initImageView();
     }
 

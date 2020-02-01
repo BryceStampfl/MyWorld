@@ -19,7 +19,7 @@ public final class ImageManager {
 
     public ImageView getImage( int nationID,String c) {
 
-        if (c.equals("Soldier")) {
+        if (c.equals("Knight")) {
             return new ImageView(knights.get(nationID));
 
         }
