@@ -3,12 +3,14 @@ package GUI;
 import Main.GameWorld;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -16,14 +18,18 @@ import java.util.ArrayList;
 public class CenterPaneController {
     final double SCALING_AMOUNT = 0.1;
     private double scaleFactor = 1;
-    private double dragX = 0;
+
+    //Higher rate to further slow dragging so its smoother.
+    private double dragSlowRate = 4;
+    //
+    private double dragX = 1;
+    private double dragY = 1;
+    //
     private double lastXPos = 0;
     private double lastYPos = 0;
-    private double dragY = 0;
 
 
-
-
+    
     @FXML // fx:id="centerPane"
     private Pane centerPane; // Value injected by FXMLLoader
 
@@ -33,27 +39,22 @@ public class CenterPaneController {
         initZoom();
         initDrag();
         assert centerPane != null : "fx:id=\"centerPane\" was not injected: check your FXML file 'CenterPane.fxml'.";
-        System.out.println("CenterPaneController init funct");
     }
 
     public void update(GameWorld gameWorld) {
-        ArrayList<ImageView> listOfDrawables = gameWorld.getDrawables();
-
-
         Group group = new Group();
         group.getChildren().addAll(gameWorld.getDrawables());
         group.setScaleX(group.getScaleX() * scaleFactor);
         group.setScaleX(group.getScaleY() * scaleFactor);
         group.setTranslateX(dragX);
         group.setTranslateY(dragY);
+
         centerPane.getChildren().clear();
         centerPane.getChildren().addAll(group);
 
     }
     public CenterPaneController(){
-        System.out.println("CenterPaneController constructor start");
         assert centerPane != null : "fx:id=\"centerPane\" was not injected: check your FXML file 'CenterPane.fxml'.";
-
     }
 
     private void initZoom(){
@@ -72,54 +73,54 @@ public class CenterPaneController {
         });
     }
 
-    private void initDrag(){
+    private void initDrag() {
 
-        centerPane.setOnMouseDragEntered(new EventHandler<MouseDragEvent>() {
-            @Override
-            public void handle(MouseDragEvent event) {
-                lastXPos = event.getX();
-                lastYPos = event.getY();
-            }
-        });
-
-        centerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // dragX = 0;
-                // dragY = 0;
-
-                // Moving the mouse right also moves the images right.
-                if (lastXPos < event.getX()) {
-                    dragX += (event.getX() - lastXPos) / 10;
-                    if (dragX > 1000) {
-                        dragX = 1000;
-                    }
+            /*When mouse is clicked we record the cursor is so we know
+            where to start the dragging point from.*/
+            centerPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    centerPane.getScene().setCursor(Cursor.HAND);
                     lastXPos = event.getX();
-                } // Moving the mouse left also moves the images left.
-                else if (lastXPos > event.getX()) {
-                    dragX += (event.getX() - lastXPos) / 10;
-                    if (dragX > 1000) {
-                        dragX = 1000;
-                    }
-                    lastXPos = event.getX();
-                }
-
-                // Moving the mouse down also moves the images down
-                if (lastYPos < event.getY()) {
-                    dragY += (event.getY() - lastYPos) / 5;
-                    if (dragY > 1000) {
-                        dragY = 1000;
-                    }
-                    lastYPos = event.getY();
-                // Moving the mouse up also moves the images up
-                }else if (lastYPos > event.getY()) {
-                    dragY += ( event.getY() - lastYPos)/5;
-                    if (dragY > 1000) {
-                        dragY = 1000;
-                    }
                     lastYPos = event.getY();
                 }
-            }
-        });
-    }
+            });
+
+            //When the mouse click is released we change the cursor back
+            centerPane.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println("MouseExited");
+                    centerPane.getScene().setCursor(Cursor.DEFAULT);
+                }
+            });
+
+            /*When the mouse is dragged we used the location we recorded from the initial click
+              and calculate where it is from where our event was fired off from and uses
+              the difference to save how much we need to translate in dragX and dragY*/
+            centerPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    centerPane.getScene().setCursor(Cursor.CLOSED_HAND);
+                    // Moving the mouse right also moves the images right.
+                    if (lastXPos < event.getX()) {
+                        dragX += (event.getX() - lastXPos)/dragSlowRate;
+                        lastXPos = event.getX();
+                    } // Moving the mouse left also moves the images left.
+                    else if (lastXPos > event.getX()) {
+                        dragX += (event.getX() - lastXPos)/dragSlowRate;
+                        lastXPos = event.getX();
+                    }
+                    // Moving the mouse down also moves the images down
+                    if (lastYPos < event.getY()) {
+                        dragY += (event.getY() - lastYPos)/dragSlowRate;
+                        lastYPos = event.getY();
+                        // Moving the mouse up also moves the images up
+                    } else if (lastYPos > event.getY()) {
+                        dragY += (event.getY() - lastYPos)/dragSlowRate;
+                        lastYPos = event.getY();
+                    }
+                }
+            });
+        }
 }
