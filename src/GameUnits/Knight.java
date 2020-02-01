@@ -3,18 +3,18 @@ package GameUnits;
 import GUI.ImageManager;
 import javafx.scene.image.ImageView;
 
-public class Soldier extends GameUnit {
+public class Knight extends GameUnit {
     private ImageView imageView;
 
 
-    public void update(){
+    public void update() {
         setXPos(getXPos() + getMoveSpeed());
         setYPos(getYPos() + getMoveSpeed());
         imageView.setX(getXPos());
         imageView.setY(getYPos());
-        }
+    }
 
-    public Soldier(int nationID, int x, int y){
+    public Knight(int nationID, int x, int y) {
         this.nationID = nationID;
         this.setXPos(x);
         this.setYPos(y);
