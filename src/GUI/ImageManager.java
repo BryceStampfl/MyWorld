@@ -8,22 +8,29 @@ public final class ImageManager {
     private static final ImageManager INSTANCE = new ImageManager();
     private ArrayList<Image> castles;
     private ArrayList<Image> knights;
-    private int NUM_CASTLES = 3;
-    private int NUM_KNIGHTS = 3;
+
+    private final int NUM_CASTLES = 3;
+    private final int NUM_KNIGHTS = 3;
+    private final int knightDim = 50;
+    private final int castleDim = 200;
 
 
-    public static ImageManager getInstance(){
-        return INSTANCE;
-    }
 
     public ImageView getImage( int nationID,String c) {
-
         if (c.equals("Knight")) {
-            return new ImageView(knights.get(nationID));
+            ImageView imageView = new ImageView(knights.get(nationID));
+            imageView.setFitHeight(knightDim);
+            imageView.setFitWidth(knightDim);
+            imageView.setPreserveRatio(true);
+            return imageView;
 
         }
         else if (c.equals("Castle")) {
-            return new ImageView(castles.get(nationID));
+            ImageView imageView = new ImageView(castles.get(nationID));
+            imageView.setFitHeight(castleDim);
+            imageView.setFitWidth(castleDim);
+            imageView.setPreserveRatio(true);
+            return imageView;
         }
         else {
             System.out.println("ERROR RETURNING");
@@ -31,11 +38,6 @@ public final class ImageManager {
         return new ImageView(knights.get(0));
     }
 
-    public ImageManager(){
-        castles = initCastleArray();
-        knights = initKnightArray();
-    }
-    /// This class is awful need to add polymorphism using string editing.
     public  ArrayList<Image> initCastleArray(){
         castles = new ArrayList<Image>();
         for (int i = 0; i < NUM_CASTLES; i++){
@@ -43,12 +45,20 @@ public final class ImageManager {
         }
         return castles;
     }
-
     public  ArrayList<Image> initKnightArray(){
         knights = new ArrayList<Image>();
         for (int i = 0; i < NUM_KNIGHTS; i++){
             knights.add((new Image("/resources/Knights/Knight" + i + ".png")));
         }
         return knights;
+    }
+
+
+    public static ImageManager getInstance(){
+        return INSTANCE;
+    }
+    public ImageManager(){
+        castles = initCastleArray();
+        knights = initKnightArray();
     }
 }

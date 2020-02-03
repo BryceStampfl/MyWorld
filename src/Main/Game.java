@@ -35,8 +35,6 @@ public class Game extends Application {
             masterLoader.setLocation(getClass().getResource("/fxml/MasterPane.fxml"));
             masterRoot = masterLoader.load();
             masterController = masterLoader.getController();
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -46,13 +44,15 @@ public class Game extends Application {
         timeline.play();
 
 
+
     }
 
 
     public Timeline initTimeline(){
-        KeyFrame kf = new KeyFrame(Duration.millis(1000/5), new EventHandler<ActionEvent>() {
+        KeyFrame kf = new KeyFrame(Duration.millis(1000/60), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent kf) {
+                //TODO process inputs if I decide to control a fraction
                 gameWorld.update();
                 masterController.update(gameWorld);
             }

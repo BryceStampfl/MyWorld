@@ -1,13 +1,20 @@
 package GUI;
 
+import GameUnits.GameUnit;
 import Main.GameWorld;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+
 /*
 This is our controller for our middle pane that renders all the graphics.
 It has zoom capability with the mouse wheel and also has drag capability
@@ -36,21 +43,21 @@ public class CenterPaneController {
         initDrag();
     }
 
-
+    // See Project:SelectingAndUI #4
     public void update(GameWorld gameWorld) {
         Group group = new Group();
         group.getChildren().addAll(gameWorld.getDrawables());
-        group.setScaleX(group.getScaleX() * scaleFactor);
-        group.setScaleY(group.getScaleY() * scaleFactor);
         group.setTranslateX(dragX);
         group.setTranslateY(dragY);
-
+        group.setScaleX(group.getScaleX() * scaleFactor);
+        group.setScaleY(group.getScaleY() * scaleFactor);
         centerPane.getChildren().clear();
         centerPane.getChildren().addAll(group);
     }
     public CenterPaneController(){
         assert centerPane != null : "fx:id=\"centerPane\" was not injected: check your FXML file 'CenterPane.fxml'.";
     }
+
 
     private void initZoom(){
         centerPane.setOnScroll(new EventHandler<ScrollEvent>() {
@@ -69,7 +76,6 @@ public class CenterPaneController {
             }
         });
     }
-
     private void initDrag() {
             /*When mouse is clicked we record the cursor is so we know
             where to start the dragging point from.*/
@@ -118,4 +124,5 @@ public class CenterPaneController {
                 }
             });
         }
+
 }
