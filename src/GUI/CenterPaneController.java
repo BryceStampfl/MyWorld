@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ It has zoom capability with the mouse wheel and also has drag capability
 with the mouse click and hold.
  */
 public class CenterPaneController {
-    final double SCALING_AMOUNT = 0.2;
+    final double SCALING_AMOUNT = 0.1;
     private double scaleFactor = 1;
 
     //Higher rate to further slow dragging so its smoother.
@@ -41,6 +42,8 @@ public class CenterPaneController {
     void initialize() {
         initZoom();
         initDrag();
+        initBorder();
+        clipChildren(centerPane,12);
     }
 
     // See Project:SelectingAndUI #4
@@ -53,11 +56,28 @@ public class CenterPaneController {
         group.setScaleY(group.getScaleY() * scaleFactor);
         centerPane.getChildren().clear();
         centerPane.getChildren().addAll(group);
-    }
-    public CenterPaneController(){
-        assert centerPane != null : "fx:id=\"centerPane\" was not injected: check your FXML file 'CenterPane.fxml'.";
+
     }
 
+    /*
+    Creates a clipping pane
+     */
+    private void clipChildren(Region region, double arc){
+        final Rectangle outputClip = new Rectangle();
+        outputClip.setArcWidth(arc);
+        outputClip.setArcHeight(arc);
+        region.setClip(outputClip);
+        region.layoutBoundsProperty().addListener((ov, oldValue, newValue) -> {
+            outputClip.setWidth(newValue.getWidth());
+            outputClip.setHeight(newValue.getHeight());
+        });
+    }
+
+    private void initBorder(){
+        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+                new CornerRadii(4), BorderStroke.THIN));
+        centerPane.setBorder(border);
+    }
 
     private void initZoom(){
         centerPane.setOnScroll(new EventHandler<ScrollEvent>() {
