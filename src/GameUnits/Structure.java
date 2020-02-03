@@ -1,7 +1,6 @@
 package GameUnits;
 
 public  abstract class Structure extends GameUnit {
-    final int moveSpeed = 0;
     private int population = 0;
 
     public void setPopulation(int population){
@@ -13,4 +12,5 @@ public  abstract class Structure extends GameUnit {
     public int getPopulation(){
         return population;
     }
+
 }

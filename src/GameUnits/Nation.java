@@ -1,24 +1,37 @@
 package GameUnits;
 
+import Utility.Point;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Nation {
+    private final int INIT_NUM_WORKERS = 10;
+    private final int INIT_NUM_ARMY = 100;
+
     private String name;
     private Castle castle;
     private ArrayList<WorkerUnit> workers;
     private ArrayList<GameUnit> army;
-    private final int INIT_NUM_WORKERS = 10;
-    private final int INIT_NUM_ARMY = 2;
-    private int id;
+    private int nationID;
 
-    public Nation(String name, int id){
+    public Nation(String name, int nationID){
         this.name = name;
-        this.id = id;
-        castle = new Castle((new Random().nextInt(1500)),
-                (new Random().nextInt(800)), id);
-        this.workers = initWorkers();
-        this.army = initArmy(id);
+        this.nationID = nationID;
+        castle = new Castle(nationID,
+                new Point(new Random().nextInt(1500),new Random().nextInt(800)));
+        workers = initWorkers();
+        army = initArmyRandom();
+
+    }
+
+    public Nation(String name, int nationID, Point location){
+        this.name = name;
+        this.nationID = nationID;
+        castle = new Castle(nationID,
+                new Point(new Random().nextInt(1500),new Random().nextInt(800)));
+        workers = initWorkers();
+        army = initArmyRandom();
 
     }
 
@@ -34,10 +47,18 @@ public class Nation {
         return workers;
     }
 
-    private ArrayList<GameUnit> initArmy(int id){
+    private ArrayList<GameUnit> initArmy(){
         army = new ArrayList<GameUnit>();
         for(int i = 0; i < INIT_NUM_ARMY; i++){
-            army.add(new Knight(id, castle.getXPos() + i * 50, castle.getYPos()));
+            army.add(new Knight(nationID, castle.getLocation()));
+        }
+        return army;
+    }
+
+    private ArrayList<GameUnit> initArmyRandom(){
+        army = new ArrayList<GameUnit>();
+        for(int i = 0; i < INIT_NUM_ARMY; i++){
+            army.add(new Knight(nationID, castle.getLocation(),(new Point((new Random().nextInt(10000)), (new Random().nextInt(10000))))));
         }
         return army;
     }

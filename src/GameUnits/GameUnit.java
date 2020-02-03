@@ -1,14 +1,19 @@
 package GameUnits;
 
-import Behaviors.DamageBehavior;
+import Behaviors.CombatBehavior;
+import Utility.Point;
+import javafx.scene.image.ImageView;
 
 //TODO all logic for stealth or rogue like behavior
 public abstract class GameUnit implements Drawable {
-    private int hp, att, def, moveSpeed,xPos, yPos;
-    private DamageBehavior behavior;
+    private int hp, att, def;
+    private double moveSpeed;
+    private CombatBehavior behavior;
+    private GameUnit target, castleLocation;
+    private Point location;
+    private ImageView imageView;
+    private int nationID;
 
-
-    public int nationID;
     public int getAtt(){
         return att;
     }
@@ -18,19 +23,24 @@ public abstract class GameUnit implements Drawable {
     public int getDef(){
         return def;
     }
-    public int getMoveSpeed() {
+    public int getNationID(){
+        return nationID;
+    }
+    public double getMoveSpeed() {
         return moveSpeed;
     }
-    public int getXPos(){
-        return this.xPos;
+    public GameUnit getTarget(){
+        return target;
     }
-    public int getYPos(){
-        return this.yPos;
-    }
-    public DamageBehavior getBehavior() {
+    public CombatBehavior getBehavior() {
         return behavior;
     }
-
+    public Point getLocation(){
+        return location;
+    }
+    public ImageView getImageView(){
+        return imageView;
+    }
 
     public void setAtt(int att) {
         this.att = att;
@@ -44,22 +54,25 @@ public abstract class GameUnit implements Drawable {
     public void setDef(int def) {
         this.def = def;
     }
-    public void setXPos(int x){
-        this.xPos = x;
+    public void setNationID(int nationID){
+        this.nationID = nationID;
     }
-    public void setYPos(int y){
-        this.yPos = y;
-    }
-    public void setMoveSpeed(int moveSpeed) {
+    public void setMoveSpeed(double moveSpeed) {
         this.moveSpeed = moveSpeed;
     }
-    public void setBehavior(DamageBehavior behavior) {
+    public void setTarget(GameUnit target){
+        this.target = target;
+    }
+    public void setBehavior(CombatBehavior behavior) {
         this.behavior = behavior;
     }
-
-
-    public int getNationID(){
-        return nationID;
+    public void setLocation(Point location){
+        this.location = location;
+        imageView.setX(location.getX());
+        imageView.setY(location.getY());
+    }
+    public void setImageView(ImageView imageView){
+        this.imageView = imageView;
     }
 
     public abstract void update();

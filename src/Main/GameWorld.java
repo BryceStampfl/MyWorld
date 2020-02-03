@@ -13,6 +13,13 @@ public class GameWorld {
         nations = initNations();
     }
 
+    private ArrayList<Nation> initRandomNations() {
+        ArrayList<Nation> nations = new ArrayList<Nation>();
+        for (int i = 0; i < NUM_NATIONS; i++) {
+            nations.add(new Nation(("Nation" + (i)), i));
+        }
+        return nations;
+    }
     private ArrayList<Nation> initNations() {
         ArrayList<Nation> nations = new ArrayList<Nation>();
         for (int i = 0; i < NUM_NATIONS; i++) {

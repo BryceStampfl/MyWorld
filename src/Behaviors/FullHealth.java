@@ -1,5 +1,5 @@
 package Behaviors;
 
-public class FullHealth implements DamageBehavior {
+public class FullHealth  {
 
 }
