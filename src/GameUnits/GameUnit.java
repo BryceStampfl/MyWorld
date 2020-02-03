@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 //TODO all logic for stealth or rogue like behavior
 public abstract class GameUnit implements Drawable {
     private int hp, att, def;
-    private double moveSpeed;
+    private double walkDistance;
     private CombatBehavior behavior;
     private GameUnit target, castleLocation;
     private Point location;
@@ -26,8 +26,8 @@ public abstract class GameUnit implements Drawable {
     public int getNationID(){
         return nationID;
     }
-    public double getMoveSpeed() {
-        return moveSpeed;
+    public double getWalkDistance() {
+        return walkDistance;
     }
     public GameUnit getTarget(){
         return target;
@@ -57,8 +57,8 @@ public abstract class GameUnit implements Drawable {
     public void setNationID(int nationID){
         this.nationID = nationID;
     }
-    public void setMoveSpeed(double moveSpeed) {
-        this.moveSpeed = moveSpeed;
+    public void setWalkDistance(double walkDistance) {
+        this.walkDistance = walkDistance;
     }
     public void setTarget(GameUnit target){
         this.target = target;

@@ -3,60 +3,109 @@ package Utility;
 import GameUnits.GameUnit;
 
 public class MoveUtility {
+    private double deltaX, deltaY;
+
     /*
     Project:Combat:#6 Movement
     Allows a unit to get the next point to move to, towards a target.
      */
-    public Point getPointTowardsTarget(Point start, Point end, double distance){
+
+
+    private double Abs(double num) {
+        if (num < 0) {
+            num *= -1;
+        }
+        return num;
+    }
+
+    public MoveUtility() {
+    }
+
+    public Point getPointTowardsTarget(Point start, Point end, double walkDistance) {
         Point movePoint = new Point();
         // If value is positive then start point is left and the end point is to the right
         double deltaX = end.getX() - start.getX();
         // If value is positive then start point is up and end point is down
         double deltaY = end.getY() - start.getY();
 
-
-        //Check if the start x point is already in bounds of the end x point
-        if(Abs(deltaX) <= (distance / 2)) {
-            if (deltaX > 0){
-                movePoint.setX(end.getX());
-            }else{
-                movePoint.setX(end.getX());
-            }
-        }
-        //Check if the start y point is already in bounds of the end x point
-        if (Abs(deltaY) <= (distance / 2)){
-            if (deltaY > 0){
-                movePoint.setY(end.getY());
-            }else {
-                movePoint.setY(end.getY());
-            }
-        }
-        // If the end object is farther than we need to be.
-        if (Abs(deltaX) > distance/2) {
-            if (deltaX > 0) {
-                movePoint.setX(start.getX() + (distance / 2));
+        if (isGameUnitAtTarget(start, end, walkDistance)) {
+            return new Point(end.getX(), end.getY());
+        } else if (isGameUnitAtTargetXAxis(start, end, walkDistance)) {
+            if (isGameUnitComingFromBelow(start, end)) {
+                return new Point(end.getX(), start.getY() + walkDistance);
             } else {
-                movePoint.setX(start.getX() - (distance / 2));
+                return new Point(end.getX(), start.getY() - walkDistance);
             }
-        }
-        if (Abs(deltaY) > distance/2){
-            if (deltaY > 0){
-                movePoint.setY(start.getY() + (distance / 2));
-            }else{
-                movePoint.setY(start.getY() - (distance / 2));
+        } else if (isGameUnitAtTargetYAxis(start, end, walkDistance)) {
+            if (isGameUnitComingFromRight(start,end)) {
+                return new Point(start.getX() + walkDistance, end.getY());
+            } else {
+                return new Point(start.getX() - walkDistance, end.getY());
             }
+        } else {
+            double x = start.getX();
+            double y = start.getY();
+            if (isGameUnitComingFromRight(start,end)) {
+                x += walkDistance;
+            } else {
+                x -= walkDistance;
+            }
+            if (isGameUnitComingFromBelow(start, end)) {
+                y += walkDistance;
+            } else {
+                y -= walkDistance;
+            }
+            return new Point(x, y);
         }
-        return movePoint;
     }
 
-    private double Abs(double num){
-        if (num < 0){
-            num *= -1;
+    public Point getPatrolPointAroundTarget(Point start, Point end, double walkDistance) {
+        if (isGameUnitAtTarget(start, end, walkDistance)) {
+            return new Point(end.getX(), end.getY());
         }
-        return num;
+
+        if (isGameUnitAtTargetXAxis(start, end, walkDistance)) {
+        }
+
+
+        return new Point();
     }
 
-    public MoveUtility(){
+    private boolean isGameUnitComingFromLeft(Point start, Point end) {
+        return (end.getX() - start.getX()   < 0);
     }
+
+    private boolean isGameUnitComingFromRight(Point start, Point end) {
+        return (end.getX() - start.getX() > 0);
+    }
+
+    private boolean isGameUnitComingFromAbove(Point start, Point end) {
+            return (end.getY() - start.getY() < 0);
+    }
+
+    private boolean isGameUnitComingFromBelow(Point start, Point end) {
+            return (end.getY() - start.getY() > 0);
+    }
+
+    private boolean isGameUnitAtTarget(Point start, Point end, double walkDistance) {
+        double deltaX = Abs(end.getX() - start.getX());
+        double deltaY = Abs(end.getY() - start.getY());
+
+        if (Abs(deltaX) < walkDistance && Abs(deltaY) < walkDistance) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isGameUnitAtTargetXAxis(Point start, Point end, double walkDistance) {
+        deltaX = Abs(end.getX() - start.getX());
+        return deltaX < walkDistance;
+    }
+
+    private boolean isGameUnitAtTargetYAxis(Point start, Point end, double walkDistance) {
+        deltaY = Abs(end.getY() - start.getY());
+        return deltaY < walkDistance;
+    }
+
 
 }

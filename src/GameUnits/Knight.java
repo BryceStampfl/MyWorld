@@ -11,7 +11,7 @@ public class Knight extends GameUnit {
 
     public void update() {
         MoveUtility util = new MoveUtility();
-        Point newLoc = util.getPointTowardsTarget(getLocation(), castleLocation, getMoveSpeed());
+        Point newLoc = util.getPointTowardsTarget(getLocation(), castleLocation, getWalkDistance());
         setLocation(newLoc);
     }
 
@@ -20,7 +20,7 @@ public class Knight extends GameUnit {
         this.castleLocation = castleLocation;
         setLocation(castleLocation);
         setNationID(nationID);
-        setMoveSpeed(5);
+        setWalkDistance(5);
     }
 
     public Knight(int nationID, Point castleLocation, Point spawn) {
@@ -28,7 +28,7 @@ public class Knight extends GameUnit {
         this.castleLocation = castleLocation;
         setLocation(spawn);
         setNationID(nationID);
-        setMoveSpeed(1);
+        setWalkDistance(1);
     }
 
 }
