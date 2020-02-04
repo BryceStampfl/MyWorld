@@ -4,7 +4,7 @@ import GameUnits.GameUnit;
 
 public class MoveUtility {
     private double deltaX, deltaY;
-
+    private CollisionUtility collisionUtility;
     /*
     Project:Combat:#6 Movement
     Allows a unit to get the next point to move to, towards a target.
@@ -19,6 +19,7 @@ public class MoveUtility {
     }
 
     public MoveUtility() {
+        collisionUtility = new CollisionUtility();
     }
 
     public Point getPointTowardsTarget(Point start, Point end, double walkDistance) {
@@ -28,7 +29,7 @@ public class MoveUtility {
         // If value is positive then start point is up and end point is down
         double deltaY = end.getY() - start.getY();
 
-        if (isGameUnitAtTarget(start, end, walkDistance)) {
+        if (collisionUtility.checkCollision(start, end, walkDistance)) {
             return new Point(end.getX(), end.getY());
         } else if (isGameUnitAtTargetXAxis(start, end, walkDistance)) {
             if (isGameUnitComingFromBelow(start, end)) {
@@ -59,7 +60,7 @@ public class MoveUtility {
         }
     }
 
-    public Point getPatrolPointAroundTarget(Point start, Point end, double walkDistance) {
+    /*public Point getPatrolPointAroundTarget(Point start, Point end, double walkDistance) {
         if (isGameUnitAtTarget(start, end, walkDistance)) {
             return new Point(end.getX(), end.getY());
         }
@@ -70,6 +71,8 @@ public class MoveUtility {
 
         return new Point();
     }
+    */
+
 
     private boolean isGameUnitComingFromLeft(Point start, Point end) {
         return (end.getX() - start.getX()   < 0);
@@ -87,15 +90,7 @@ public class MoveUtility {
             return (end.getY() - start.getY() > 0);
     }
 
-    private boolean isGameUnitAtTarget(Point start, Point end, double walkDistance) {
-        double deltaX = Abs(end.getX() - start.getX());
-        double deltaY = Abs(end.getY() - start.getY());
 
-        if (Abs(deltaX) < walkDistance && Abs(deltaY) < walkDistance) {
-            return true;
-        }
-        return false;
-    }
 
     private boolean isGameUnitAtTargetXAxis(Point start, Point end, double walkDistance) {
         deltaX = Abs(end.getX() - start.getX());
@@ -106,6 +101,7 @@ public class MoveUtility {
         deltaY = Abs(end.getY() - start.getY());
         return deltaY < walkDistance;
     }
+
 
 
 }

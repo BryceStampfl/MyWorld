@@ -1,6 +1,6 @@
 package GameUnits;
 
-public  abstract class Structure extends GameUnit {
+public  abstract class StructureGameUnit extends GameUnit {
     private int population = 0;
 
     public void setPopulation(int population){
