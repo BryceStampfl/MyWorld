@@ -30,4 +30,8 @@ public class Point {
         y = 0;
     }
 
+    public boolean equals(Point b){
+        return this.x == b.getX() && this.y == b.getY();
+    }
+
 }

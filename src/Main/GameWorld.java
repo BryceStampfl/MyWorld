@@ -1,16 +1,18 @@
 package Main;
 import GameUnits.*;
 import GameUnits.Nation;
+import Utility.CollisionUtility;
 import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
 
 public class GameWorld {
     private ArrayList<Nation> nations;
+    private CollisionUtility collisionUtility;
     private final int NUM_NATIONS = 3;
 
     public GameWorld() {
         nations = initNations();
+        collisionUtility = new CollisionUtility();
     }
 
     private ArrayList<Nation> initRandomNations() {
@@ -30,15 +32,11 @@ public class GameWorld {
 
     // For now only the militaristic game units will be drawable.
     //TODO add other units besides castles to the game screen
-    public ArrayList<GameUnit> getAllUnits() {
-        ArrayList<GameUnit> temp = new ArrayList<GameUnit>();
+    public ArrayList<CombatGameUnit> getAllUnits() {
+        ArrayList<CombatGameUnit> temp = new ArrayList<CombatGameUnit>();
 
         for (Nation nation : nations) {
-            // temp.add(nations.get(i).getCastle());
             temp.addAll(nation.getArmy());
-        }
-        for (Nation nation : nations) {
-            temp.add(nation.getCastle());
         }
         return (temp);
     }
@@ -56,10 +54,35 @@ public class GameWorld {
         return temp;
     }
 
-
     public void update() {
+        checkForCollisions();
         for (Nation n : nations) {
             n.update();
+        }
+    }
+    private void clearCheckedCollisions() {
+        for (CombatGameUnit g : getAllUnits()) {
+            g.setCheckedCollision(false);
+        }
+    }
+
+    private void checkForCollisions(){
+        clearCheckedCollisions();
+
+        for (CombatGameUnit g : getAllUnits()){
+            if (!g.isCheckedCollision() && !g.hasCombatTarget()){
+                g.setCheckedCollision(true);
+                for (CombatGameUnit target : getAllUnits()){
+                    if (!target.isCheckedCollision()){
+                        if (collisionUtility.checkCombatCollision(g,target)){
+                            g.setHasCombatTarget(true);
+                            target.setHasCombatTarget(true);
+                            g.setCombatTarget(target);
+                            target.setCombatTarget(g);
+                        }
+                    }
+                }
+            }
         }
     }
 }

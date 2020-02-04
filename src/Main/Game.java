@@ -42,9 +42,6 @@ public class Game extends Application {
         stage.show();
         timeline = initTimeline();
         timeline.play();
-
-
-
     }
 
 
