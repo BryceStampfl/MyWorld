@@ -10,7 +10,7 @@ public class CollisionUtility {
     public boolean checkCombatCollision(CombatGameUnit one, CombatGameUnit two) {
         Point a = one.getLocation();
         Point b = two.getLocation();
-        double walkDistance = 100;
+        double walkDistance = 50;
         deltaX = Abs(a.getX() - b.getX());
         deltaY = Abs(a.getY() - b.getY());
 
@@ -20,17 +20,17 @@ public class CollisionUtility {
         return false;
     }
 
-    public ArrayList<CombatGameUnit> updateUnitsInLOS(CombatGameUnit source, ArrayList<CombatGameUnit> listOfAllUnits) {
+    public ArrayList<CombatGameUnit> updateEnemyUnitsInLOS(CombatGameUnit source, ArrayList<CombatGameUnit> listOfAllUnits) {
         CollisionUtility collisionUtility = new CollisionUtility();
-        ArrayList<CombatGameUnit> unitsInLOS = new ArrayList<>();
+        ArrayList<CombatGameUnit> enemyUnitsInLOS = new ArrayList<>();
         for (CombatGameUnit cgu : listOfAllUnits) {
-            if (!source.equals(cgu)) {
+            if (!source.equals(cgu) && source.getNationID() != cgu.getNationID() ) {
                 if (collisionUtility.hasVisionOf(source, cgu)) {
-                    unitsInLOS.add(cgu);
+                    enemyUnitsInLOS.add(cgu);
                 }
             }
         }
-        return unitsInLOS;
+        return enemyUnitsInLOS;
     }
 
     public boolean hasVisionOf(CombatGameUnit source, CombatGameUnit target) {

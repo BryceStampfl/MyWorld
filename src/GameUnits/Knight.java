@@ -2,6 +2,7 @@ package GameUnits;
 
 import GUI.ImageManager;
 import Utility.*;
+import jdk.jfr.Event;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,12 +15,16 @@ public class Knight extends CombatGameUnit {
     private final int health = 10;
     private Point castleLocation;
     private CollisionUtility collisionUtility;
-
+    private EventGenerator eventGenerator;
 
     public void update(ArrayList<CombatGameUnit> listOfAllUnits) {
-        setGameUnitsInLOS(collisionUtility.updateUnitsInLOS(this, listOfAllUnits));
-        System.out.println("Printing units in LOS for " + this + listOfAllUnits.toString());
+        setEnemyGameUnitsInLOS(collisionUtility.updateEnemyUnitsInLOS(this, listOfAllUnits));
+        System.out.println("Printing units in LOS for i" + this + listOfAllUnits.toString());
+        eventGenerator.GenerateEvents(this);
+
+        //Add ckean up
     }
+
 
 
     public Knight(int nationID, Point castleLocation) {
@@ -42,6 +47,7 @@ public class Knight extends CombatGameUnit {
         setHp(new Random().nextInt(100));
         setVisionRange(50);
         collisionUtility = new CollisionUtility();
+        eventGenerator = new EventGenerator();
     }
 
     private void attack() {

@@ -62,6 +62,7 @@ public class Nation {
     private void updateArmy(ArrayList<CombatGameUnit> listOfAllUnits) {
         for (CombatGameUnit g : army) {
             g.update(listOfAllUnits);
+
         }
     }
 
