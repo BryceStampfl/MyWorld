@@ -22,6 +22,8 @@ public class MoveUtility {
         collisionUtility = new CollisionUtility();
     }
 
+
+
     public Point getPointTowardsTarget(Point start, Point end, double walkDistance) {
         Point movePoint = new Point();
         // If value is positive then start point is left and the end point is to the right
@@ -101,6 +103,7 @@ public class MoveUtility {
         deltaY = Abs(end.getY() - start.getY());
         return deltaY < walkDistance;
     }
+
 
 
 
