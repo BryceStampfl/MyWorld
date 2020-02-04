@@ -1,8 +1,10 @@
 package Main;
+
 import GameUnits.*;
 import GameUnits.Nation;
 import Utility.CollisionUtility;
 import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 
 public class GameWorld {
@@ -22,6 +24,7 @@ public class GameWorld {
         }
         return nations;
     }
+
     private ArrayList<Nation> initNations() {
         ArrayList<Nation> nations = new ArrayList<Nation>();
         for (int i = 0; i < NUM_NATIONS; i++) {
@@ -41,7 +44,7 @@ public class GameWorld {
         return (temp);
     }
 
-    public ArrayList<ImageView> getDrawables(){
+    public ArrayList<ImageView> getDrawables() {
         ArrayList<ImageView> temp = new ArrayList<ImageView>();
         for (Nation nation : nations) {
             for (GameUnit g : nation.getArmy()) {
@@ -55,34 +58,9 @@ public class GameWorld {
     }
 
     public void update() {
-        checkForCollisions();
+        // checkForCollisions();
         for (Nation n : nations) {
-            n.update();
-        }
-    }
-    private void clearCheckedCollisions() {
-        for (CombatGameUnit g : getAllUnits()) {
-            g.setCheckedCollision(false);
-        }
-    }
-
-    private void checkForCollisions(){
-        clearCheckedCollisions();
-
-        for (CombatGameUnit g : getAllUnits()){
-            if (!g.isCheckedCollision() && !g.hasCombatTarget()){
-                g.setCheckedCollision(true);
-                for (CombatGameUnit target : getAllUnits()){
-                    if (!target.isCheckedCollision()){
-                        if (collisionUtility.checkCombatCollision(g,target)){
-                            g.setHasCombatTarget(true);
-                            target.setHasCombatTarget(true);
-                            g.setCombatTarget(target);
-                            target.setCombatTarget(g);
-                        }
-                    }
-                }
-            }
+            n.update(getAllUnits());
         }
     }
 }

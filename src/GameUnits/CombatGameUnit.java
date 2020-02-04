@@ -1,13 +1,15 @@
 package GameUnits;
 
 import Behaviors.CombatBehavior;
+import java.util.ArrayList;
 
 public abstract class CombatGameUnit extends GameUnit {
-    private double att, def;
+    private double att, def, visionRange;
     private boolean checkedCollision = false;
     private boolean hasCombatTarget = false;
     private CombatGameUnit combatTarget;
     private CombatBehavior behavior;
+    private ArrayList<CombatGameUnit> gameUnitsInLOS;
 
 
 
@@ -20,14 +22,14 @@ public abstract class CombatGameUnit extends GameUnit {
         return def;
     }
 
-    /*public boolean isInCombat() {
-        return inCombat;
+    public double getVisionRange(){
+        return visionRange;
     }
 
-    public boolean isCombatFinished() {
-        return combatFinished;
+    public ArrayList<CombatGameUnit> getGameUnitsInLOS(){
+        return this.gameUnitsInLOS;
     }
-*/
+
     public boolean hasCombatTarget(){
         return hasCombatTarget;
     }
@@ -54,6 +56,14 @@ public abstract class CombatGameUnit extends GameUnit {
         this.def = def;
     }
 
+    public void setVisionRange(double visionRange){
+        this.visionRange = visionRange;
+    }
+
+    public void setGameUnitsInLOS(ArrayList<CombatGameUnit> gameUnitsInLOS){
+        this.gameUnitsInLOS = gameUnitsInLOS;
+    }
+
     public void setHasCombatTarget(boolean hasCombatTarget){
         this.hasCombatTarget = hasCombatTarget;
     }
@@ -71,6 +81,5 @@ public abstract class CombatGameUnit extends GameUnit {
         this.behavior = behavior;
     }
 
-    public abstract void updateLocation();
-    public abstract void updateCombat();
+    public abstract void update(ArrayList<CombatGameUnit> listOfAllUnits);
 }

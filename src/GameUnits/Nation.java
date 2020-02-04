@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Nation {
-    private final int INIT_NUM_ARMY = 20;
+    private final int INIT_NUM_ARMY = 3;
 
     private int nationID;
     private String name;
@@ -53,22 +53,16 @@ public class Nation {
         return army;
     }
 
-    public void update() {
-        updateArmy();
+    public void update(ArrayList<CombatGameUnit> listOfAllUnits) {
+        updateArmy(listOfAllUnits);
         updateCastle();
 
     }
 
-    private void updateArmy() {
-
+    private void updateArmy(ArrayList<CombatGameUnit> listOfAllUnits) {
         for (CombatGameUnit g : army) {
-            if (!g.hasCombatTarget()) {
-                g.updateLocation();
-            } else {
-                g.updateCombat();
-            }
+            g.update(listOfAllUnits);
         }
-
     }
 
     private void updateCastle() {
