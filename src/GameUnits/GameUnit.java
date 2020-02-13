@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 //TODO all logic for stealth or rogue like behavior
 public abstract class GameUnit implements Drawable {
     private int nationID;
-    private double hp, walkDistance;
+    private double hp, walkDistance, size;
     private boolean alive = true;
     private Point location, moveLocation;
     private ImageView imageView;
@@ -23,6 +23,10 @@ public abstract class GameUnit implements Drawable {
 
     public double getWalkDistance() {
         return walkDistance;
+    }
+
+    public double getSize() {
+        return size;
     }
 
     public boolean isAlive(){
@@ -61,8 +65,11 @@ public abstract class GameUnit implements Drawable {
 
     public void setLocation(Point location) {
         this.location = location;
-        imageView.setX(location.getX());
-        imageView.setY(location.getY());
+        imageView.setX(location.getX() - size/2);
+        imageView.setY(location.getY()- size/2);
+    }
+    public void setSize(double size) {
+        this.size = size;
     }
 
     public void setMoveLocation(Point moveLocation) {

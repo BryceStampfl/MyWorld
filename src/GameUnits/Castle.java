@@ -4,6 +4,7 @@ import GUI.ImageManager;
 import Utility.Point;
 
 public class Castle extends StructureGameUnit{
+    
 
     public Castle (int nationID, Point location){
         setNationID(nationID);

@@ -1,110 +1,156 @@
 package Utility;
 
-import GameUnits.GameUnit;
+import GameUnits.CombatGameUnit;
 
 public class MoveUtility {
     private double deltaX, deltaY;
-    private CollisionUtility collisionUtility;
+    private PositionUtility pos;
     /*
     Project:Combat:#6 Movement
     Allows a unit to get the next point to move to, towards a target.
      */
 
-
-    private double Abs(double num) {
-        if (num < 0) {
-            num *= -1;
-        }
-        return num;
-    }
-
     public MoveUtility() {
-        collisionUtility = new CollisionUtility();
+        pos = new PositionUtility();
     }
 
+    public Point getImprovedGetPointTowardsTarget(CombatGameUnit source, CombatGameUnit target) {
+        pos = new PositionUtility();
+        deltaX = pos.getDeltaX(source, target);
+        deltaY = pos.getDeltaY(source, target);
+        double walkDistance = source.getWalkDistance();
+        double slope;
+        double distY = 0;
+        double distX = 0;
+        double remainder = 0;
 
 
-    public Point getPointTowardsTarget(Point start, Point end, double walkDistance) {
-        Point movePoint = new Point();
-        // If value is positive then start point is left and the end point is to the right
-        double deltaX = end.getX() - start.getX();
-        // If value is positive then start point is up and end point is down
-        double deltaY = end.getY() - start.getY();
+        if (deltaX + deltaY <= walkDistance) {
+            return new Point(target.getLocation().getX(), target.getLocation().getY());
+        } else if (deltaX <= walkDistance || deltaY <= walkDistance) {
+            if (deltaX <= walkDistance) {
+                remainder = 0;
+                if (pos.isGameUnitComingFromBelow(source, target)) {
+                    remainder = -1 * (walkDistance - deltaX);
+                } else {
+                    remainder = (walkDistance - deltaX);
+                }
+                distY += remainder;
+            }
+            if (deltaY <= walkDistance) {
+                remainder = 0;
+                if (pos.isGameUnitComingFromRight(source, target)) {
+                    remainder = -1 * (walkDistance - deltaY);
+                } else {
+                    remainder = (walkDistance - deltaY);
+                }
+                distX += remainder;
+            }
+        } else if (deltaX > walkDistance && deltaY > walkDistance) {
+            //X distance is farther
+            if (deltaX > deltaY) {
+                slope = deltaY / deltaX;
+                if (walkDistance * slope > walkDistance / 2) {
+                    distX = walkDistance * slope;
+                    distY = walkDistance - distX;
+                } else {
+                    distY = walkDistance * slope;
+                    distX = walkDistance - distY;
+                }
+                // deltaY > deltaX
+            } else {
+                slope = deltaX / deltaY;
+                if (walkDistance * slope > walkDistance / 2) {
+                    distY = walkDistance * slope;
+                    distX = walkDistance - distY;
+                } else {
+                    distX = walkDistance * slope;
+                    distY = walkDistance - distX;
+                }
+            }
 
-        if (collisionUtility.checkCollision(start, end, walkDistance)) {
-            return new Point(end.getX(), end.getY());
-        } else if (isGameUnitAtTargetXAxis(start, end, walkDistance)) {
-            if (isGameUnitComingFromBelow(start, end)) {
-                return new Point(end.getX(), start.getY() + walkDistance);
-            } else {
-                return new Point(end.getX(), start.getY() - walkDistance);
+            if (pos.isGameUnitComingFromBelow(source, target)) {
+                distY *= -1;
             }
-        } else if (isGameUnitAtTargetYAxis(start, end, walkDistance)) {
-            if (isGameUnitComingFromRight(start,end)) {
-                return new Point(start.getX() + walkDistance, end.getY());
-            } else {
-                return new Point(start.getX() - walkDistance, end.getY());
+            if (pos.isGameUnitComingFromRight(source, target)) {
+                distX *= -1;
             }
-        } else {
-            double x = start.getX();
-            double y = start.getY();
-            if (isGameUnitComingFromRight(start,end)) {
-                x += walkDistance;
-            } else {
-                x -= walkDistance;
-            }
-            if (isGameUnitComingFromBelow(start, end)) {
-                y += walkDistance;
-            } else {
-                y -= walkDistance;
-            }
-            return new Point(x, y);
         }
+        return new Point(source.getLocation().getX() + distX, source.getLocation().getY() + distY);
     }
 
-    /*public Point getPatrolPointAroundTarget(Point start, Point end, double walkDistance) {
-        if (isGameUnitAtTarget(start, end, walkDistance)) {
-            return new Point(end.getX(), end.getY());
+    public Point getImprovedGetPointTowardsTarget(CombatGameUnit source) {
+        Point target = source.getMoveLocation();
+        deltaX = pos.getDeltaX(source.getLocation(), source.getMoveLocation());
+        deltaY = pos.getDeltaY(source.getLocation(), source.getMoveLocation());
+        double walkDistance = source.getWalkDistance();
+        // If farther than walkDistance away
+
+        if (deltaX + deltaY <= walkDistance) {
+            return new Point(target.getX(), target.getY());
+        } else if (deltaX <= walkDistance || deltaY <= walkDistance) {
+
+            double remainder;
+            double distY = 0;
+            double distX = 0;
+            if (deltaX <= walkDistance) {
+                remainder = 0;
+                if (pos.isGameUnitComingFromBelow(source.getLocation(), target)) {
+                    remainder = -1 * (walkDistance - deltaX);
+                } else {
+                    remainder = (walkDistance - deltaX);
+                }
+                distY += remainder;
+            }
+            if (deltaY <= walkDistance) {
+                remainder = 0;
+                if (pos.isGameUnitComingFromRight(source.getLocation(), target)) {
+                    remainder = -1 * (walkDistance - deltaY);
+                } else {
+                    remainder = (walkDistance - deltaY);
+                }
+                distX += remainder;
+            }
+            return new Point(source.getLocation().getX() + distX, source.getLocation().getY() + distY);
+
+        } else if (deltaX > walkDistance && deltaY > walkDistance) {
+            double slope, distX, distY;
+            double remainder = 0;
+            //X distance is farther
+            if (deltaX > deltaY) {
+                slope = deltaY / deltaX;
+                if (walkDistance * slope > walkDistance / 2) {
+                    distX = walkDistance * slope;
+                    distY = walkDistance - distX;
+                } else {
+                    distY = walkDistance * slope;
+                    distX = walkDistance - distY;
+                }
+                // deltaY > deltaX
+            } else {
+                slope = deltaX / deltaY;
+                if (walkDistance * slope > walkDistance / 2) {
+                    distY = walkDistance * slope;
+                    distX = walkDistance - distY;
+                } else {
+                    distX = walkDistance * slope;
+                    distY = walkDistance - distX;
+                }
+            }
+
+            if (pos.isGameUnitComingFromBelow(source.getLocation(), target)) {
+                distY *= -1;
+            }
+            if (pos.isGameUnitComingFromRight(source.getLocation(), target)) {
+                distX *= -1;
+            }
+
+
+            return new Point(source.getLocation().getX() + distX, source.getLocation().getY() + distY);
         }
-
-        if (isGameUnitAtTargetXAxis(start, end, walkDistance)) {
-        }
-
-
-        return new Point();
+        System.out.println("Error shouldn't get here in getImprovedGetPointTowardsTarget in MoveUtility");
+        return new Point(0, 0);
     }
-    */
-
-
-    private boolean isGameUnitComingFromLeft(Point start, Point end) {
-        return (end.getX() - start.getX()   < 0);
-    }
-
-    private boolean isGameUnitComingFromRight(Point start, Point end) {
-        return (end.getX() - start.getX() > 0);
-    }
-
-    private boolean isGameUnitComingFromAbove(Point start, Point end) {
-            return (end.getY() - start.getY() < 0);
-    }
-
-    private boolean isGameUnitComingFromBelow(Point start, Point end) {
-            return (end.getY() - start.getY() > 0);
-    }
-
-
-
-    private boolean isGameUnitAtTargetXAxis(Point start, Point end, double walkDistance) {
-        deltaX = Abs(end.getX() - start.getX());
-        return deltaX < walkDistance;
-    }
-
-    private boolean isGameUnitAtTargetYAxis(Point start, Point end, double walkDistance) {
-        deltaY = Abs(end.getY() - start.getY());
-        return deltaY < walkDistance;
-    }
-
-
 
 
 }
