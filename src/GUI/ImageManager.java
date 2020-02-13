@@ -61,4 +61,8 @@ public final class ImageManager {
         castles = initCastleArray();
         knights = initKnightArray();
     }
+
+    public int getKnightDim(){
+        return knightDim;
+    }
 }

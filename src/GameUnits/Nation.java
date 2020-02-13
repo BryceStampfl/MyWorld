@@ -2,11 +2,12 @@ package GameUnits;
 
 import Utility.Point;
 
+import javax.swing.text.html.ImageView;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Nation {
-    private final int INIT_NUM_ARMY = 3;
+    private final int INIT_NUM_ARMY = 10;
 
     private int nationID;
     private String name;
@@ -50,6 +51,10 @@ public class Nation {
     }
 
     public ArrayList<CombatGameUnit> getArmy() {
+        army.removeIf(CombatGameUnit::getIsDead);
+        while (army.size() < INIT_NUM_ARMY) {
+            army.add(new Knight(nationID, castle.getLocation(), (new Point((new Random().nextInt(1500)), (new Random().nextInt(1500))))));
+        }
         return army;
     }
 
@@ -69,7 +74,5 @@ public class Nation {
     private void updateCastle() {
         this.castle.update();
     }
-
-
 
 }

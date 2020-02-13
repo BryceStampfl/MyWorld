@@ -2,27 +2,36 @@ package ActionEvents;
 
 import GameUnits.CombatGameUnit;
 import Utility.MoveUtility;
-import Utility.Point;
 
 public class MoveEvent implements ActionEvent {
-    private MoveUtility moveUtility;
-    private Point moveToLocation;
+    private CombatGameUnit source, target;
 
 
-    public void processEvent(CombatGameUnit source){
-        moveUtility = new MoveUtility();
-        //source.setLocation(moveToLocation);
-        //Right now the move location is the castle
-        source.setLocation(moveUtility.getPointTowardsTarget(source.getLocation(),source.getMoveLocation(),source.getWalkDistance()));
+    public void processEvent() {
+        MoveUtility moveUtility = new MoveUtility();
+        if (source.isMoveCDTimerFinished()) {
+            if (target == null) {
+                //source.setLocation(moveUtility.getPointTowardsTarget(source.getLocation(), source.getMoveLocation(), source.getWalkDistance()));
+                source.setLocation(moveUtility.getImprovedGetPointTowardsTarget(source));
+
+            } else {
+                //source.setLocation(moveUtility.getPointTowardsTarget(source.getLocation(), target.getMoveLocation(), source.getWalkDistance()));
+                //source.setLocation(moveUtility.getPointTowardsTarget(source, target));
+                source.setLocation(moveUtility.getImprovedGetPointTowardsTarget(source,target));
+            }
+            source.startMoveTimer();
+        }
     }
 
-    public MoveEvent(CombatGameUnit start, CombatGameUnit end){
-        moveUtility = new MoveUtility();
-         moveToLocation = moveUtility.getPointTowardsTarget(start.getLocation(), end.getLocation(), start.getWalkDistance());
+    public MoveEvent(CombatGameUnit source) {
+        this.source = source;
     }
-    public MoveEvent(CombatGameUnit start){
-        moveUtility = new MoveUtility();
-        moveToLocation = moveUtility.getPointTowardsTarget(start.getLocation(), start.getMoveLocation(), start.getWalkDistance());
+
+    public MoveEvent(CombatGameUnit source, CombatGameUnit target) {
+        this.source = source;
+        this.target = target;
     }
 }
+
+
 

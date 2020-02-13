@@ -37,7 +37,6 @@ public class GameWorld {
     //TODO add other units besides castles to the game screen
     public ArrayList<CombatGameUnit> getAllUnits() {
         ArrayList<CombatGameUnit> temp = new ArrayList<CombatGameUnit>();
-
         for (Nation nation : nations) {
             temp.addAll(nation.getArmy());
         }
@@ -47,18 +46,17 @@ public class GameWorld {
     public ArrayList<ImageView> getDrawables() {
         ArrayList<ImageView> temp = new ArrayList<ImageView>();
         for (Nation nation : nations) {
+            temp.add(nation.getCastle().getImageView());
+        }
+        for (Nation nation : nations) {
             for (GameUnit g : nation.getArmy()) {
                 temp.add(g.getImageView());
             }
-        }
-        for (Nation nation : nations) {
-            temp.add(nation.getCastle().getImageView());
         }
         return temp;
     }
 
     public void update() {
-        // checkForCollisions();
         for (Nation n : nations) {
             n.update(getAllUnits());
         }
